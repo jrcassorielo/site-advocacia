@@ -1,0 +1,38 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import ScrollToTop from './components/ScrollToTop';
+import SmoothScroll from './components/SmoothScroll';
+import CustomCursor from './components/CustomCursor';
+import HomePage from './pages/HomePage';
+import TrabalhistaPage from './pages/TrabalhistaPage';
+import FamiliaPage from './pages/FamiliaPage';
+import PrevidenciarioPage from './pages/PrevidenciarioPage';
+import ServidoresPage from './pages/ServidoresPage';
+import ProfessoresPage from './pages/ProfessoresPage';
+import SaudePage from './pages/SaudePage';
+import ApoioPage from './pages/ApoioPage';
+
+function App() {
+  return (
+    <HelmetProvider>
+      <Router>
+        <ScrollToTop />
+        <SmoothScroll />
+        <CustomCursor />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/trabalhista" element={<TrabalhistaPage />} />
+          <Route path="/familia" element={<FamiliaPage />} />
+          <Route path="/previdenciario" element={<PrevidenciarioPage />} />
+          <Route path="/servidores" element={<ServidoresPage />} />
+          <Route path="/professores" element={<ProfessoresPage />} />
+          <Route path="/saude" element={<SaudePage />} />
+          <Route path="/apoio-escolar" element={<ApoioPage />} />
+        </Routes>
+      </Router>
+    </HelmetProvider>
+  );
+}
+
+export default App;
