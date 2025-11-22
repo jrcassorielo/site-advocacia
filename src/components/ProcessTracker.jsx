@@ -7,7 +7,15 @@ const ProcessTracker = () => {
     const [processNumber, setProcessNumber] = useState('');
     const [result, setResult] = useState(null);
     const [error, setError] = useState('');
+    const [showToast, setShowToast] = useState(false);
     const [searchParams] = useSearchParams();
+
+    const handleCopyAndGo = (url) => {
+        navigator.clipboard.writeText(processNumber);
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3000);
+        setTimeout(() => window.open(url, '_blank'), 1000); // Delay slightly to let user see the toast
+    };
 
     useEffect(() => {
         const processoParam = searchParams.get('processo');
@@ -183,6 +191,31 @@ const ProcessTracker = () => {
                     </div>
 
                     <AnimatePresence>
+                        {showToast && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0 }}
+                                style={{
+                                    position: 'fixed',
+                                    bottom: '20px',
+                                    left: '50%',
+                                    transform: 'translateX(-50%)',
+                                    background: '#00C851',
+                                    color: 'white',
+                                    padding: '1rem 2rem',
+                                    borderRadius: '50px',
+                                    zIndex: 1000,
+                                    boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+                                    fontWeight: '600'
+                                }}
+                            >
+                                Número copiado! Cole no site do tribunal. 📋
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
+                    <AnimatePresence>
                         {error && (
                             <motion.div
                                 initial={{ opacity: 0, y: -10 }}
@@ -212,15 +245,13 @@ const ProcessTracker = () => {
                                         <h3 style={{ fontSize: '2rem', color: 'var(--accent-primary)', marginBottom: '2rem' }}>{result.courtName}</h3>
 
                                         <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
-                                            <a
-                                                href={result.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
+                                            <button
+                                                onClick={() => handleCopyAndGo(result.url)}
                                                 className="btn-outline"
-                                                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
+                                                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: 'pointer' }}
                                             >
-                                                Ver Andamento Oficial <ArrowRight size={18} />
-                                            </a>
+                                                Copiar e Ver Andamento <ArrowRight size={18} />
+                                            </button>
                                             <a
                                                 href={`https://wa.me/5514996029862?text=Olá, consultei o processo ${processNumber} no site e gostaria de uma análise jurídica.`}
                                                 target="_blank"
