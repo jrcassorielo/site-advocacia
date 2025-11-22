@@ -113,16 +113,18 @@ const AreasBento = () => {
             <style>{`
                 .bento-grid {
                     display: grid;
-                    grid-template-columns: repeat(12, 1fr);
+                    grid-template-columns: 1fr; /* Mobile: 1 column */
                     gap: 1.5rem;
                     grid-auto-rows: minmax(280px, auto);
                 }
                 
-                .bento-large { grid-column: span 12; }
-                .bento-medium { grid-column: span 12; }
-                .bento-wide { grid-column: span 12; }
+                /* Mobile: All take full width */
+                .bento-large, .bento-medium, .bento-wide { grid-column: span 1; }
 
                 @media (min-width: 900px) {
+                    .bento-grid {
+                        grid-template-columns: repeat(12, 1fr);
+                    }
                     .bento-large { grid-column: span 7; }
                     .bento-medium { grid-column: span 5; }
                     .bento-wide { grid-column: span 12; }

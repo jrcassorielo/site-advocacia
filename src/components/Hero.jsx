@@ -26,7 +26,26 @@ const Hero = ({ onOpenModal }) => {
             }} />
 
             <div className="container">
-                <div className="grid-cols-2" style={{ alignItems: 'center' }}>
+                <div className="hero-content" style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '3rem',
+                    flexDirection: 'column-reverse' // Mobile default: Image top (or bottom depending on pref), Text bottom. Let's do Text Top, Image Bottom for standard flow, so column.
+                }}>
+                    <style>{`
+                    .hero-content {
+                        flex-direction: column;
+                        text-align: center;
+                    }
+                    @media (min-width: 968px) {
+                        .hero-content {
+                            flex-direction: row;
+                            text-align: left;
+                        }
+                    }
+                `}</style>
+
+                    {/* Text Content */}
 
                     {/* Text Content */}
                     <motion.div
@@ -86,7 +105,11 @@ const Hero = ({ onOpenModal }) => {
                             Empresas erram cálculos — propositalmente ou não. Nossa inteligência jurídica identifica cada centavo que foi sonegado nos últimos 5 anos.
                         </p>
 
-                        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                        <div className="hero-buttons" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                            <style>{`
+                                .hero-buttons { justify-content: center; }
+                                @media (min-width: 968px) { .hero-buttons { justify-content: flex-start; } }
+                            `}</style>
                             <button onClick={onOpenModal} className="btn-primary">
                                 Solicitar Análise Gratuita
                             </button>

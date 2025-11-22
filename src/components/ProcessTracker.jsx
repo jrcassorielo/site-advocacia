@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSearchParams } from 'react-router-dom';
 import { Search, ArrowRight, AlertCircle, CheckCircle, MessageCircle, MapPin } from 'lucide-react';
 
 const ProcessTracker = () => {
     const [processNumber, setProcessNumber] = useState('');
     const [result, setResult] = useState(null);
     const [error, setError] = useState('');
+    const [searchParams] = useSearchParams();
+
+    useEffect(() => {
+        const processoParam = searchParams.get('processo');
+        if (processoParam) {
+            setProcessNumber(processoParam);
+            // Optional: Auto-trigger search if desired, but might be better to let user click to confirm
+        }
+    }, [searchParams]);
 
     // MAPPING: CNJ Codes to URLs
     // Format: J.TR (Justice.Tribunal)
