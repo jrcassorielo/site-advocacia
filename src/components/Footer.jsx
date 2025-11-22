@@ -12,8 +12,8 @@ const Footer = () => {
             <div className="container">
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-                    gap: '3rem',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                    gap: '2rem',
                     marginBottom: '3rem'
                 }}>
                     {/* Brand */}

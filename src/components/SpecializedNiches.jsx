@@ -103,8 +103,8 @@ const SpecializedNiches = () => {
 
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-                    gap: '2rem'
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                    gap: '1.5rem'
                 }}>
                     {niches.map((niche, index) => (
                         <NicheCard key={index} {...niche} />
