@@ -71,10 +71,17 @@ const Footer = () => {
                     <div>
                         © {new Date().getFullYear()} Cassorielo Tose Advocacia. Todos os direitos reservados.
                     </div>
-                    <div style={{ display: 'flex', gap: '1rem' }}>
-                        <Instagram size={20} style={{ cursor: 'pointer', opacity: 0.7 }} />
-                        <Linkedin size={20} style={{ cursor: 'pointer', opacity: 0.7 }} />
+                    <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+                        <a href="https://instagram.com/joaorenan.cassorielo" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', transition: 'color 0.3s' }} className="hover-text-primary">
+                            <Instagram size={18} /> <span style={{ fontSize: '0.8rem' }}>@joaorenan</span>
+                        </a>
+                        <a href="https://instagram.com/carolinetose" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', transition: 'color 0.3s' }} className="hover-text-primary">
+                            <Instagram size={18} /> <span style={{ fontSize: '0.8rem' }}>@carolinetose</span>
+                        </a>
                     </div>
+                    <style>{`
+                        .hover-text-primary:hover { color: var(--accent-primary) !important; }
+                    `}</style>
                 </div>
             </div>
         </footer>
