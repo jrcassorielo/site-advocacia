@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import StepWizard from './StepWizard';
 import { ChevronRight, ChevronLeft, AlertTriangle, CheckCircle, ShieldAlert, Lock, User, Zap, Briefcase, Clock, HeartPulse, Flame } from 'lucide-react';
-import { supabase } from '../../lib/supabase';
+import { supabase, isSupabaseConfigured } from '../../services/supabaseClient';
 
 const RescisaoCalculator = () => {
     const [step, setStep] = useState(0);
@@ -272,14 +272,20 @@ const RescisaoCalculator = () => {
         setResult(finalResult);
 
         // Save Lead
-        try {
-            await supabase.from('leads').insert([{
-                name: data.name,
-                phone: data.phone,
-                calculator_type: 'radar_direitos_v2_refined',
-                data: { ...data, result: finalResult }
-            }]);
-        } catch (e) { console.error(e); }
+        if (isSupabaseConfigured()) {
+            try {
+                const { error } = await supabase.from('leads').insert([{
+                    name: data.name || 'Anônimo',
+                    phone: data.phone || 'Não informado',
+                    case_type: 'trabalhista',
+                    details: { ...data, result: finalResult }
+                }]);
+                if (error) console.error('Supabase Error:', error);
+                else console.log('Lead saved successfully!');
+            } catch (e) { console.error('Save failed:', e); }
+        } else {
+            console.warn('Supabase not configured. Lead not saved.');
+        }
 
         setIsSubmitting(false);
         nextStep();
