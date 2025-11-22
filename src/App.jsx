@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import ScrollToTop from './components/ScrollToTop';
 import SmoothScroll from './components/SmoothScroll';
 import CustomCursor from './components/CustomCursor';
+import CookieConsent from './components/CookieConsent';
 import HomePage from './pages/HomePage';
 import TrabalhistaPage from './pages/TrabalhistaPage';
 import FamiliaPage from './pages/FamiliaPage';
@@ -12,6 +13,7 @@ import ServidoresPage from './pages/ServidoresPage';
 import ProfessoresPage from './pages/ProfessoresPage';
 import SaudePage from './pages/SaudePage';
 import ApoioPage from './pages/ApoioPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
@@ -19,7 +21,9 @@ function App() {
       <Router>
         <ScrollToTop />
         <SmoothScroll />
+        <SmoothScroll />
         <CustomCursor />
+        <CookieConsent />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/trabalhista" element={<TrabalhistaPage />} />
@@ -29,6 +33,7 @@ function App() {
           <Route path="/professores" element={<ProfessoresPage />} />
           <Route path="/saude" element={<SaudePage />} />
           <Route path="/apoio-escolar" element={<ApoioPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>
     </HelmetProvider>
