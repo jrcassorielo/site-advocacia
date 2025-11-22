@@ -8,6 +8,7 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import ContactModal from '../components/ContactModal';
 import LaborCalculator from '../components/Calculator/Calculator';
+import ProcessTracker from '../components/ProcessTracker';
 
 const HomePage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,9 +18,7 @@ const HomePage = () => {
             <Navbar onOpenModal={() => setIsModalOpen(true)} />
             <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
-            import ProcessTracker from '../components/ProcessTracker';
 
-            // ... inside component
             <Hero onOpenModal={() => setIsModalOpen(true)} />
             <ProcessTracker />
             <WhoWeAre />
