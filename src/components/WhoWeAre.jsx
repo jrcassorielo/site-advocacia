@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Instagram } from 'lucide-react';
 import lawyerImage from '../assets/advogado-hero.jpg';
 
 const WhoWeAre = () => {
@@ -82,7 +83,11 @@ const WhoWeAre = () => {
                             />
                         </div>
                         <h3 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>João Renan Cassorielo</h3>
-                        <p style={{ color: 'var(--accent-primary)', fontWeight: '700', marginBottom: '1.5rem', letterSpacing: '1px' }}>OAB/SP 360.274 | SÓCIO FUNDADOR</p>
+                        <p style={{ color: 'var(--accent-primary)', fontWeight: '700', marginBottom: '1rem', letterSpacing: '1px' }}>OAB/SP 360.274 | SÓCIO FUNDADOR</p>
+
+                        <a href="https://instagram.com/joaorenan.cassorielo" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '0.9rem', padding: '0.5rem 1rem', border: '1px solid var(--glass-border)', borderRadius: '50px', transition: 'all 0.3s' }} className="hover-instagram">
+                            <Instagram size={18} /> @joaorenan.cassorielo
+                        </a>
 
                         <div style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.8', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                             <p>
@@ -138,7 +143,11 @@ const WhoWeAre = () => {
                             />
                         </div>
                         <h3 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Caroline Pereira Tose</h3>
-                        <p style={{ color: 'var(--accent-primary)', fontWeight: '700', marginBottom: '1.5rem', letterSpacing: '1px' }}>OAB/SP 390.871 | SÓCIA FUNDADORA</p>
+                        <p style={{ color: 'var(--accent-primary)', fontWeight: '700', marginBottom: '1rem', letterSpacing: '1px' }}>OAB/SP 390.871 | SÓCIA FUNDADORA</p>
+
+                        <a href="https://instagram.com/carolinetose" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '0.9rem', padding: '0.5rem 1rem', border: '1px solid var(--glass-border)', borderRadius: '50px', transition: 'all 0.3s' }} className="hover-instagram">
+                            <Instagram size={18} /> @carolinetose
+                        </a>
 
                         <div style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.8', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                             <p>
@@ -165,6 +174,7 @@ const WhoWeAre = () => {
             </div>
             <style>{`
                 .partner-card-2 { margin-top: 4rem; }
+                .hover-instagram:hover { background: rgba(255,255,255,0.1); color: white !important; border-color: white !important; }
                 @media (max-width: 768px) {
                     .partner-card-2 { margin-top: 0 !important; }
                     .partners-grid { gap: 2rem !important; }
