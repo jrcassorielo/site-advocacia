@@ -43,15 +43,15 @@ const Footer = () => {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                                 <MapPin size={18} color="var(--accent-primary)" />
-                                <span>Rua XV das Colinas, 55 - Iacanga/SP</span>
+                                <span>Atendimento em Iacanga e Região</span>
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                                 <Mail size={18} color="var(--accent-primary)" />
-                                <span>contato@cassorielotose.com.br</span>
+                                <span>contato@cassorielotose.adv.br</span>
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                                 <Phone size={18} color="var(--accent-primary)" />
-                                <span>(14) 99999-9999</span>
+                                <span>(14) 99602-9862</span>
                             </div>
                         </div>
                     </div>

@@ -575,7 +575,7 @@ const RescisaoCalculator = () => {
                                 </p>
                             </div>
                             <a
-                                href={`https://wa.me/5514999999999?text=Olá, fiz o Radar de Direitos. Deu R$ ${formatCurrency(result.totalGeral)}. Quero analisar meu caso.`}
+                                href={`https://wa.me/5514996029862?text=Olá, fiz o Radar de Direitos. Deu R$ ${formatCurrency(result.totalGeral)}. Quero analisar meu caso.`}
                                 target="_blank"
                                 className="whatsapp-btn"
                             >

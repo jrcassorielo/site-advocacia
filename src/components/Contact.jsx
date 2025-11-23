@@ -12,11 +12,11 @@ const Contact = () => {
 
                     <div className="info-item">
                         <h4>Endereço</h4>
-                        <p>Av. Paulista, 1000 - São Paulo, SP</p>
+                        <p>Atendimento em Iacanga e Região</p>
                     </div>
                     <div className="info-item">
-                        <h4>Telefone</h4>
-                        <p>(11) 99999-9999</p>
+                        <h4>Telefone / WhatsApp</h4>
+                        <p>(14) 99602-9862</p>
                     </div>
                     <div className="info-item">
                         <h4>Email</h4>
@@ -24,7 +24,13 @@ const Contact = () => {
                     </div>
                 </div>
 
-                <form className="contact-form">
+                <form className="contact-form" onSubmit={(e) => {
+                    e.preventDefault();
+                    const name = e.target[0].value;
+                    const msg = e.target[3].value;
+                    const text = `Olá, meu nome é ${name}. ${msg}`;
+                    window.open(`https://wa.me/5514996029862?text=${encodeURIComponent(text)}`, '_blank');
+                }}>
                     <div className="form-group">
                         <input type="text" placeholder="Seu Nome" required />
                     </div>
@@ -37,7 +43,7 @@ const Contact = () => {
                     <div className="form-group">
                         <textarea rows="5" placeholder="Mensagem" required></textarea>
                     </div>
-                    <button type="submit" className="btn">Enviar Mensagem</button>
+                    <button type="submit" className="btn">Enviar Mensagem no WhatsApp</button>
                 </form>
             </div>
         </section>
