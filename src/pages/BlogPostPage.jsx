@@ -1,15 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { blogPosts } from '../data/blogPosts';
-import { Calendar, ArrowLeft, Tag, Share2 } from 'lucide-react';
+import { supabase } from '../services/supabaseClient';
+import { blogPosts as localPosts } from '../data/blogPosts';
+import { Calendar, ArrowLeft, Tag } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Helmet } from 'react-helmet-async';
 
 const BlogPostPage = () => {
     const { slug } = useParams();
-    const post = blogPosts.find(p => p.slug === slug);
+    const [post, setPost] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchPost = async () => {
+            try {
+                const { data, error } = await supabase
+                    .from('posts')
+                    .select('*')
+                    .eq('slug', slug)
+                    .single();
+
+                if (error || !data) {
+                    // Fallback to local
+                    const local = localPosts.find(p => p.slug === slug);
+                    setPost(local || null);
+                } else {
+                    setPost(data);
+                }
+            } catch (e) {
+                const local = localPosts.find(p => p.slug === slug);
+                setPost(local || null);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchPost();
+    }, [slug]);
+
+    if (loading) return <div className="page-wrapper"><div className="container" style={{ paddingTop: '150px' }}>Carregando...</div></div>;
 
     if (!post) {
         return <Navigate to="/blog" replace />;
@@ -40,7 +71,7 @@ const BlogPostPage = () => {
                                     <Tag size={14} color="var(--accent-primary)" /> {post.category}
                                 </span>
                                 <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                                    <Calendar size={16} /> {new Date(post.date).toLocaleDateString('pt-BR')}
+                                    <Calendar size={16} /> {new Date(post.created_at || post.date).toLocaleDateString('pt-BR')}
                                 </span>
                             </div>
 
@@ -49,7 +80,7 @@ const BlogPostPage = () => {
 
                         <div className="glass-panel" style={{ padding: '0', overflow: 'hidden', marginBottom: '3rem' }}>
                             <img
-                                src={post.image}
+                                src={post.image_url || post.image}
                                 alt={post.title}
                                 style={{ width: '100%', maxHeight: '400px', objectFit: 'cover' }}
                             />

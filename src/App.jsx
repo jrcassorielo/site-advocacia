@@ -15,6 +15,7 @@ import SaudePage from './pages/SaudePage';
 import ApoioPage from './pages/ApoioPage';
 import BlogPage from './pages/BlogPage';
 import BlogPostPage from './pages/BlogPostPage';
+import AdminPage from './pages/AdminPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/apoio-escolar" element={<ApoioPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
+          <Route path="/admin" element={<AdminPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>
