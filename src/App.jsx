@@ -13,6 +13,8 @@ import ServidoresPage from './pages/ServidoresPage';
 import ProfessoresPage from './pages/ProfessoresPage';
 import SaudePage from './pages/SaudePage';
 import ApoioPage from './pages/ApoioPage';
+import BlogPage from './pages/BlogPage';
+import BlogPostPage from './pages/BlogPostPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
@@ -33,6 +35,9 @@ function App() {
           <Route path="/professores" element={<ProfessoresPage />} />
           <Route path="/saude" element={<SaudePage />} />
           <Route path="/apoio-escolar" element={<ApoioPage />} />
+          <Route path="/apoio-escolar" element={<ApoioPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>

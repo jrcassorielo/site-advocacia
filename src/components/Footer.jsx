@@ -43,7 +43,7 @@ const Footer = () => {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                                 <MapPin size={18} color="var(--accent-primary)" />
-                                <span>Atendimento em Iacanga e Região</span>
+                                <span>Atendimento Online em Todo o Brasil</span>
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                                 <Mail size={18} color="var(--accent-primary)" />

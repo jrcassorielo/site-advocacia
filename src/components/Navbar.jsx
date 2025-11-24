@@ -27,8 +27,9 @@ const Navbar = ({ onOpenModal }) => {
 
     const navLinks = [
         { name: 'Início', path: '/' },
-        { name: 'Quem Somos', path: '/#quem-somos' }, // Anchor links would need smooth scroll handling
+        { name: 'Quem Somos', path: '/#quem-somos' },
         { name: 'Áreas de Atuação', path: '/#areas' },
+        { name: 'Blog', path: '/blog' },
     ];
 
     return (

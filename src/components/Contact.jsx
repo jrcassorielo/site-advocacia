@@ -12,7 +12,7 @@ const Contact = () => {
 
                     <div className="info-item">
                         <h4>Endereço</h4>
-                        <p>Atendimento em Iacanga e Região</p>
+                        <p>Atendimento Online em Todo o Brasil</p>
                     </div>
                     <div className="info-item">
                         <h4>Telefone / WhatsApp</h4>
