@@ -1,0 +1,77 @@
+name: Saúde pública Cassorielo
+on:
+  push:
+    paths:
+      - .github/workflows/saude-cassorielo.yml
+  workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
+permissions: {}
+concurrency:
+  group: saude-publica-cassorielo
+  cancel-in-progress: true
+jobs:
+  disponibilidade:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Conferir site, WWW e saúde pública do portal
+        shell: bash
+        run: |
+          python3 - <<'PYMONITOR'
+          #!/usr/bin/env python3
+          """Sonda pública: nunca lê autenticação, páginas privadas ou conteúdo de clientes."""
+          import datetime
+          import json
+          import subprocess
+          import sys
+          
+          ALVOS = [
+              ('site', 'https://cassorielo.online/', 'https://cassorielo.online/'),
+              ('www', 'https://www.cassorielo.online/', 'https://cassorielo.online/'),
+              ('portal', 'https://meucaso.cassorielo.online/api/saude', 'https://meucaso.cassorielo.online/api/saude'),
+          ]
+          
+          def conferir(nome, url, destino):
+              p = subprocess.run(['curl', '--silent', '--show-error', '--location',
+                  '--proto', '=https', '--proto-redir', '=https', '--max-redirs', '3',
+                  '--connect-timeout', '8', '--max-time', '25', '--max-filesize', '1048576',
+                  '--retry', '1', '--retry-max-time', '30', '--write-out', '\n%{http_code}\n%{url_effective}',
+                  url], capture_output=True, timeout=65)
+              partes = p.stdout.decode('utf-8', errors='replace').rsplit('\n', 2)
+              corpo, codigo, final = partes if len(partes) == 3 else ('', '000', '')
+              ok = p.returncode == 0 and codigo == '200' and final == destino
+              motivo = 'ok' if ok else 'http_ou_destino'
+              if ok and nome == 'portal':
+                  try:
+                      s = json.loads(corpo)
+                      horario = datetime.datetime.fromisoformat(s['quando'].replace('Z', '+00:00'))
+                      idade = (datetime.datetime.now(datetime.timezone.utc) - horario).total_seconds()
+                      ok = (s.get('ok') is True and s.get('banco') == 'ok'
+                            and s.get('modo') == 'local' and s.get('homologacao') is not True
+                            and s.get('host') == 'meucaso.cassorielo.online'
+                            and s.get('proto') == 'https' and -60 <= idade <= 300)
+                  except (ValueError, KeyError, TypeError):
+                      ok = False
+                  motivo = 'ok' if ok else 'saude_invalida_ou_antiga'
+              elif ok:
+                  ok = 'O nome do cargo' in corpo and 'meucaso.cassorielo.online' in corpo
+                  motivo = 'ok' if ok else 'conteudo_inesperado'
+              # Não imprime o corpo HTTP nem stderr de transporte no log público.
+              return {'alvo': nome, 'ok': ok, 'http': codigo, 'motivo': motivo}
+          
+          def main():
+              resultados = []
+              for nome, url, destino in ALVOS:
+                  try:
+                      resultados.append(conferir(nome, url, destino))
+                  except (OSError, subprocess.TimeoutExpired):
+                      resultados.append({'alvo': nome, 'ok': False, 'http': '000', 'motivo': 'transporte'})
+              ok = all(r['ok'] for r in resultados)
+              print(json.dumps({'ok': ok, 'quando': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                                'resultados': resultados}, ensure_ascii=False))
+              return 0 if ok else 1
+          
+          if __name__ == '__main__':
+              sys.exit(main())
+          PYMONITOR
